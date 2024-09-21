@@ -8,7 +8,7 @@
 
     - name: Sync docker-compose.yml
       ansible.builtin.copy:
-        src: box/syncthing-app/docker-compose.yaml
+        src: syncthing-app/docker-compose.yaml
         dest: /home/wilnil/syncthing-app/docker-compose.yaml
 
     - name: Restart Syncthing
