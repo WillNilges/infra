@@ -8,7 +8,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
+    user: "1000"
     volumes:
       - ~/syncthing:/var/syncthing
+      - type: bind
+        source: ~/immich-app/library
+        target: /var/immich-app/library
     network_mode: host
     restart: unless-stopped

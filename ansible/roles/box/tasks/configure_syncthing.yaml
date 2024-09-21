@@ -13,7 +13,7 @@
 
     - name: Restart Syncthing
       ansible.builtin.command:
-        cmd: docker compose restart
+        cmd: docker compose up -d
         chdir: /home/wilnil/syncthing-app
 
 

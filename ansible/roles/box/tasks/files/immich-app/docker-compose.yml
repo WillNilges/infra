@@ -30,6 +30,7 @@ services:
     restart: always
     healthcheck:
       disable: false
+    user: "1000"
 
   immich-machine-learning:
     container_name: immich_machine_learning
@@ -46,6 +47,7 @@ services:
     restart: always
     healthcheck:
       disable: false
+    user: "1000"
 
   redis:
     container_name: immich_redis
@@ -53,6 +55,7 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
+    user: "1000"
 
   database:
     container_name: immich_postgres
@@ -72,6 +75,7 @@ services:
       start_period: 5m
     command: ["postgres", "-c", "shared_preload_libraries=vectors.so", "-c", 'search_path="$$user", public, vectors', "-c", "logging_collector=on", "-c", "max_wal_size=2GB", "-c", "shared_buffers=512MB", "-c", "wal_compression=on"]
     restart: always
+    user: "1000"
 
 volumes:
   model-cache:
