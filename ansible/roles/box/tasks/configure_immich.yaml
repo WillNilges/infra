@@ -1,0 +1,30 @@
+- name: Configure Immich Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/immich-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: box/immich-app/docker-compose.yml
+        dest: /home/wilnil/immich-app/docker-compose.yml
+
+    - name: Sync hwaccel.ml.yml 
+      ansible.builtin.copy:
+        src: box/immich-app/hwaccel.ml.yml
+        dest: /home/wilnil/immich-app/hwaccel.ml.yml
+
+    - name: Sync hwaccel.transcoding.yml 
+      ansible.builtin.copy:
+        src: box/immich-app/hwaccel.transcoding.yml
+        dest: /home/wilnil/immich-app/hwaccel.transcoding.yml
+
+    # XXX: Yes, I could use the docker plugin for this, but I am scared of it.
+    - name: Restart immich
+      ansible.builtin.command:
+        cmd: docker compose restart
+        chdir: /home/wilnil/immich-app
+
+# TODO: Figure out .env file
