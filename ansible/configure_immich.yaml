@@ -1,0 +1,28 @@
+- name: Configure Immich Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/immich-app
+        state: directory
+    - name: Make docker compose symlink
+      ansible.builtin.file:
+        src: /home/wilnil/infra/box/immich-app/docker-compose.yml
+        dest: /home/wilnil/immich-app/docker-compose.yml
+        owner: wilnil
+        group: wilnil
+        state: link
+    - name: Make ml symlink
+      ansible.builtin.file:
+        src: /home/wilnil/infra/box/immich-app/hwaccel.ml.yml
+        dest: /home/wilnil/immich-app/hwaccel.ml.yml
+        owner: wilnil
+        group: wilnil
+        state: link
+    - name: Make transcoding symlink
+      ansible.builtin.file:
+        src: /home/wilnil/infra/box/immich-app/hwaccel.transcoding.yml
+        dest: /home/wilnil/immich-app/hwaccel.transcoding.yml
+        owner: wilnil
+        group: wilnil
+        state: link
