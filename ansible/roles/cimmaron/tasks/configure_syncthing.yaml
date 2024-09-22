@@ -1,0 +1,19 @@
+- name: Configure Syncthing Container
+  hosts: cimmaron
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/syncthing-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: syncthing-app/docker-compose.yaml
+        dest: /home/wilnil/syncthing-app/docker-compose.yaml
+
+    - name: Restart Syncthing
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/syncthing-app
+
+

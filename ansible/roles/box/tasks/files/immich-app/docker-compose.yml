@@ -55,7 +55,7 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
-    user: "1000"
+    #user: "1000"
 
   database:
     container_name: immich_postgres
