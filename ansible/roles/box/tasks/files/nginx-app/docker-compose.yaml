@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  nginx:
+    networks:
+      - frontend
+    ports:
+      - 443:443
+    image: nginx
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ~/certs:/etc/nginx/certs
+
+networks:
+  frontend:
+  backend:

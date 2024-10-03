@@ -1,0 +1,17 @@
+- name: Configure nginx Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/nginx-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: nginx-app/
+        dest: /home/wilnil/nginx-app
+
+    - name: Restart nginx
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/nginx-app

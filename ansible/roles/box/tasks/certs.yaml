@@ -1,0 +1,13 @@
+- name: Get certs
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/certs
+        state: directory
+
+    - name: Get certs from tailscale 
+      ansible.builtin.command:
+      cmd: |
+        sudo tailscale cert box.iguana-stargazer.ts.net --cert-file ~/certs/box.crt --key-file ~/certs/box.key
+
