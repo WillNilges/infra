@@ -1,15 +1,23 @@
 version: "3.3"
 services:
   nginx:
+    container_name: nginx
     networks:
-      - frontend
-    ports:
-      - 443:443
+      - traefik 
+    expose:
+      - 80
+      - 443
     image: nginx
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-      - ~/certs:/etc/nginx/certs
+    #volumes:
+    #  - ./nginx:/etc/nginx/conf.d
+    #  - ~/certs:/etc/nginx/certs
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.http.routers.nginx.rule=Host(`nginx.box.willard`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
 
 networks:
-  frontend:
-  backend:
+  traefik:
+    external: true
+    name: traefik-net
