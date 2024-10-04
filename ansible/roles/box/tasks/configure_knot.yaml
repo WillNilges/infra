@@ -1,0 +1,17 @@
+- name: configure knot container
+  hosts: box
+  tasks:
+    - name: Clear knot configuration 
+      ansible.builtin.file:
+        state: absent
+        path: /home/wilnil/knot-app/
+
+    - name: Sync directory
+      ansible.builtin.copy:
+        src: knot-app/
+        dest: /home/wilnil/knot-app/
+
+    - name: Restart knot
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/knot-app

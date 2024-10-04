@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  knot:
+    container_name: knot
+    ports:
+      - 53:53/udp
+    image: cznic/knot:latest
+    command: knotd
+    volumes:
+      - ./zones:/var/lib/knot/zones
+      - ./config:/config
+      - storage:/storage
+      - rundir:/rundir
+
+volumes:
+  storage:
+  rundir:

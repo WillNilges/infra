@@ -13,9 +13,9 @@ services:
       # - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
       # - "--entrypoints.web.http.redirections.entrypoint.permanent=false"
       - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.grandsvcresolver.acme.tlschallenge=true"
-      - "--certificatesresolvers.grandsvcresolver.acme.email=will.nilges@gmail.com"
-      - "--certificatesresolvers.grandsvcresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.acmewillardresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.acmewillardresolver.acme.email=will.nilges@gmail.com"
+      - "--certificatesresolvers.acmewillardresolver.acme.storage=/letsencrypt/acme.json"
       #- "--certificatesresolvers.grandsvcresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
     ports:
       - "80:80"

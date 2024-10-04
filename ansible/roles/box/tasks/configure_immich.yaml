@@ -27,4 +27,4 @@
         cmd: docker compose up -d
         chdir: /home/wilnil/immich-app
 
-# TODO: Figure out .env file
+# TODO: Figure out where to keep .env file safely
