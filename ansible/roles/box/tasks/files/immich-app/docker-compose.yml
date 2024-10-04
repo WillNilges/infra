@@ -27,8 +27,6 @@ services:
       - immich
     expose:
       - 3001
-    ports:
-      - 2283:3001
     depends_on:
       - redis
       - database
@@ -41,6 +39,7 @@ services:
       - "traefik.port=3001"
       - "traefik.http.routers.immich.rule=Host(`photos.box.willard`)"
       - "traefik.http.routers.immich.entrypoints=web"
+      - "traefik.docker.network=traefik-net"
 
   immich-machine-learning:
     container_name: immich_machine_learning
