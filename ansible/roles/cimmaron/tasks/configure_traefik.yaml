@@ -1,0 +1,17 @@
+- name: Configure Traefik Container
+  hosts: cimmaron
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/traefik-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: traefik-app/docker-compose.yaml
+        dest: /home/wilnil/traefik-app/docker-compose.yaml
+
+    - name: Restart traefik
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/traefik-app

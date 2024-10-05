@@ -1,0 +1,17 @@
+- name: Configure uptime-kuma Container
+  hosts: cimmaron
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/uptime-kuma-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: uptime-kuma-app/docker-compose.yaml
+        dest: /home/wilnil/uptime-kuma-app/docker-compose.yaml
+
+    - name: Restart uptime-kuma
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/uptime-kuma-app
