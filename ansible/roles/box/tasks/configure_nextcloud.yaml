@@ -1,0 +1,17 @@
+- name: Configure nextcloud Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/nextcloud-app
+        state: directory
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: nextcloud-app/
+        dest: /home/wilnil/nextcloud-app
+
+    - name: Restart nextcloud
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/nextcloud-app
