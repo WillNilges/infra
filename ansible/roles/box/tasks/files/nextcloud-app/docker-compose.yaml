@@ -38,7 +38,6 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
-
     labels:
       - "traefik.enable=true"
       - "traefik.port=80"
@@ -54,7 +53,20 @@ services:
       - "traefik.http.routers.nextcloud-insecure.middlewares=nextcloud-https@docker"
       - "traefik.docker.network=traefik-net"
 
-
+  collabora:
+    container_name: collabora
+    image: collabora/code:latest
+    restart: always
+    environment:
+      - password=${COLLABORA_PASSWORD}
+      - username=${COLLABORA_USERNAME}
+      - aliasgroup1=https://cloud.box.willard
+      - server_name=collabora.box.willard
+      #- extra_params=--o:ssl.enable=true
+    networks:
+      - nextcloud
+    expose:
+      - 9980
 
 networks:
   traefik:
