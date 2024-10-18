@@ -1,12 +1,12 @@
 - name: Configure nginx Container
   hosts: box
   tasks:
-    - name: Make directory
+    - name: Clear proxy configuration 
       ansible.builtin.file:
-        path: /home/wilnil/nginx-app
-        state: directory
+        state: absent
+        path: /home/wilnil/nginx-app/
 
-    - name: Sync docker-compose.yml
+    - name: Copy directory
       ansible.builtin.copy:
         src: nginx-app/
         dest: /home/wilnil/nginx-app

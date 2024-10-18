@@ -8,14 +8,25 @@ services:
       - 80
       - 443
     image: nginx
-    #volumes:
-    #  - ./nginx:/etc/nginx/conf.d
+    volumes:
+      - ./html:/var/www/html
+      - ./nginx:/etc/nginx/conf.d
     #  - ~/certs:/etc/nginx/certs
     labels:
       - "traefik.enable=true"
       - "traefik.port=80"
-      - "traefik.http.routers.nginx.rule=Host(`nginx.box.willard`)"
-      - "traefik.http.routers.nginx.entrypoints=web"
+        # with HTTPS
+      - "traefik.http.routers.nginx.rule=Host(`home.box.willard`)"
+      - "traefik.http.routers.nginx.entrypoints=websecure"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.routers.nginx.tls.certresolver=acmewillardresolver"
+        # Redirect insecure traffic
+      - "traefik.http.routers.nginx-insecure.rule=Host(`home.box.willard`)"
+      - "traefik.http.routers.nginx-insecure.entrypoints=web"
+      - "traefik.http.middlewares.nginx-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.nginx-insecure.middlewares=nginx-https@docker"
+      - "traefik.docker.network=traefik-net"
+
 
 networks:
   traefik:
