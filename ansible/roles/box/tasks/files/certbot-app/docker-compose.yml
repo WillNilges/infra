@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  certbot:
+    container_name: certbot-he
+    build:
+      dockerfile: ./Dockerfile
+    env_file: .env
+    volumes:
+      - /home/wilnil/certs/certbot-app:/etc/letsencrypt/live
+    entrypoint: sh /certonly.sh

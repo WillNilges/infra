@@ -1,0 +1,45 @@
+- name: Configure Certbot Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/certbot-app
+        state: directory
+
+    - name: Sync Dockerfile
+      ansible.builtin.copy:
+        src: certbot-app/Dockerfile
+        dest: /home/wilnil/certbot-app/Dockerfile
+        
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: certbot-app/docker-compose.yml
+        dest: /home/wilnil/certbot-app/docker-compose.yml
+
+    - name: Sync certonly.sh
+      ansible.builtin.copy:
+        src: certbot-app/certonly.sh
+        dest: /home/wilnil/certbot-app/certonly.sh
+
+    - name: Sync renew.sh
+      ansible.builtin.copy:
+        src: certbot-app/renew.sh
+        dest: /home/wilnil/certbot-app/renew.sh
+
+    - name: Sync certbot-he-hook.sh
+      ansible.builtin.copy:
+        src: certbot-app/certbot-he-hook.sh
+        dest: /home/wilnil/certbot-app/certbot-he-hook.sh
+
+    - name: Rebuild certbot 
+      ansible.builtin.command:
+        cmd: docker compose build
+        chdir: /home/wilnil/certbot-app
+
+    # XXX: Yes, I could use the docker plugin for this, but I am scared of it.
+    #- name: Restart certbot
+    #  ansible.builtin.command:
+    #    cmd: docker compose up -d
+    #    chdir: /home/wilnil/certbot-app
+
+# TODO: Figure out where to keep .env file safely
