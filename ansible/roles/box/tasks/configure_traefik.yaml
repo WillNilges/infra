@@ -11,6 +11,11 @@
         src: traefik-app/docker-compose.yaml
         dest: /home/wilnil/traefik-app/docker-compose.yaml
 
+    - name: Sync traefik.yml
+      ansible.builtin.copy:
+        src: traefik-app/traefik.yml
+        dest: /home/wilnil/traefik-app/traefik.yml
+
     - name: Restart traefik
       ansible.builtin.command:
         cmd: docker compose up -d
