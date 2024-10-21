@@ -7,6 +7,9 @@ services:
       #- "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
+      - --providers.file.directory=/configuration/
+      - --providers.file.watch=true
+
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
       # - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
@@ -20,7 +23,7 @@ services:
     volumes:
       - "/home/wilnil/certs/acme-sh/willard.gay_ecc:/certs"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./traefik.yml:/etc/traefik/traefik.yml"
+      - "./configuration:/configuration"
     networks:
       - traefik
 
