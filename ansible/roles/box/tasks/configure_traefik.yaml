@@ -6,10 +6,10 @@
         path: /home/wilnil/traefik-app
         state: directory
 
-    - name: Sync docker-compose.yml
+    - name: Sync directory
       ansible.builtin.copy:
-        src: traefik-app/docker-compose.yaml
-        dest: /home/wilnil/traefik-app/docker-compose.yaml
+        src: traefik-app/
+        dest: /home/wilnil/traefik-app/
 
     - name: Restart traefik
       ansible.builtin.command:

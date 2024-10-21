@@ -1,0 +1,35 @@
+- name: Configure acme-sh Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/acme-sh-app
+        state: directory
+
+    - name: Sync Dockerfile
+      ansible.builtin.copy:
+        src: acme-sh-app/Dockerfile
+        dest: /home/wilnil/acme-sh-app/Dockerfile
+        
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: acme-sh-app/docker-compose.yml
+        dest: /home/wilnil/acme-sh-app/docker-compose.yml
+
+    - name: Sync issue-cert.sh
+      ansible.builtin.copy:
+        src: acme-sh-app/issue-cert.sh
+        dest: /home/wilnil/acme-sh-app/issue-cert.sh
+
+    - name: Rebuild acme-sh 
+      ansible.builtin.command:
+        cmd: docker compose build
+        chdir: /home/wilnil/acme-sh-app
+
+    # XXX: Yes, I could use the docker plugin for this, but I am scared of it.
+    - name: Restart acme-sh
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/acme-sh-app
+
+# TODO: Figure out where to keep .env file safely

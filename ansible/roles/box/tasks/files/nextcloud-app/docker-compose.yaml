@@ -42,31 +42,31 @@ services:
       - "traefik.enable=true"
       - "traefik.port=80"
         # with HTTPS
-      - "traefik.http.routers.nextcloud.rule=Host(`cloud.box.willard`)"
+      - "traefik.http.routers.nextcloud.rule=Host(`cloud.willard.gay`)"
       - "traefik.http.routers.nextcloud.entrypoints=websecure"
       - "traefik.http.routers.nextcloud.tls=true"
-      - "traefik.http.routers.nextcloud.tls.certresolver=acmewillardresolver"
+      #- "traefik.http.routers.nextcloud.tls.certresolver=acmewillardresolver"
         # Redirect insecure traffic
-      - "traefik.http.routers.nextcloud-insecure.rule=Host(`cloud.box.willard`)"
+      - "traefik.http.routers.nextcloud-insecure.rule=Host(`cloud.willard.gay`)"
       - "traefik.http.routers.nextcloud-insecure.entrypoints=web"
       - "traefik.http.middlewares.nextcloud-https.redirectscheme.scheme=https"
       - "traefik.http.routers.nextcloud-insecure.middlewares=nextcloud-https@docker"
       - "traefik.docker.network=traefik-net"
 
-  collabora:
-    container_name: collabora
-    image: collabora/code:latest
-    restart: always
-    environment:
-      - password=${COLLABORA_PASSWORD}
-      - username=${COLLABORA_USERNAME}
-      - aliasgroup1=https://cloud.box.willard
-      - server_name=collabora.box.willard
-      #- extra_params=--o:ssl.enable=true
-    networks:
-      - nextcloud
-    expose:
-      - 9980
+  #collabora:
+  #  container_name: collabora
+  #  image: collabora/code:latest
+  #  restart: always
+  #  environment:
+  #    - password=${COLLABORA_PASSWORD}
+  #    - username=${COLLABORA_USERNAME}
+  #    - aliasgroup1=https://cloud.box.willard
+  #    - server_name=collabora.box.willard
+  #    #- extra_params=--o:ssl.enable=true
+  #  networks:
+  #    - nextcloud
+  #  expose:
+  #    - 9980
 
 networks:
   traefik:

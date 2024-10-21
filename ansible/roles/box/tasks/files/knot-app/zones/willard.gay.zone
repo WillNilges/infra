@@ -1,0 +1,16 @@
+; $ORIGIN willard.
+$TTL 3600
+@  SOA   100.115.232.75. noc.willard.gay. ( 2019090700 1d 2h 4w 1h )
+@  NS    ns
+@  A     100.115.232.75             ; IPv4 address for willard 
+
+box A 100.115.232.75
+*.box CNAME box
+photos CNAME box
+cloud CNAME box
+
+cimmaron A 100.78.148.89
+*.cimmaron CNAME cimmaron
+
+world A 192.168.1.1
+home A 192.168.1.249

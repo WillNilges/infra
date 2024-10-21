@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  acme-sh:
+    container_name: acme-sh
+    build:
+      dockerfile: ./Dockerfile
+    env_file: .env
+    volumes:
+      - /home/wilnil/certs/acme-sh/:/root/.acme.sh/
+    entrypoint: bash -c "/root/issue-cert.sh; cron -f"

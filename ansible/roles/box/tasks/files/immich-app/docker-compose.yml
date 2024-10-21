@@ -39,8 +39,14 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.port=3001"
-      - "traefik.http.routers.immich.rule=Host(`photos.box.willard`)"
-      - "traefik.http.routers.immich.entrypoints=web"
+      - "traefik.http.routers.immich.rule=Host(`photos.willard.gay`)"
+      - "traefik.http.routers.immich.entrypoints=websecure"
+      - "traefik.http.routers.immich.tls=true"
+        # Redirect insecure traffic
+      - "traefik.http.routers.immich-insecure.rule=Host(`photos.willard.gay`)"
+      - "traefik.http.routers.immich-insecure.entrypoints=web"
+      - "traefik.http.middlewares.immich-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.immich-insecure.middlewares=immich-https@docker"
       - "traefik.docker.network=traefik-net"
 
   immich-machine-learning:

@@ -16,10 +16,10 @@ services:
       - "traefik.enable=true"
       - "traefik.port=80"
         # with HTTPS
-      - "traefik.http.routers.nginx.rule=Host(`home.box.willard`)"
+      - "traefik.http.routers.nginx.rule=Host(`home.willard.gay`)"
       - "traefik.http.routers.nginx.entrypoints=websecure"
       - "traefik.http.routers.nginx.tls=true"
-      - "traefik.http.routers.nginx.tls.certresolver=acmewillardresolver"
+      #- "traefik.http.routers.nginx.tls.certresolver=acmewillardresolver"
         # Redirect insecure traffic
       - "traefik.http.routers.nginx-insecure.rule=Host(`home.box.willard`)"
       - "traefik.http.routers.nginx-insecure.entrypoints=web"

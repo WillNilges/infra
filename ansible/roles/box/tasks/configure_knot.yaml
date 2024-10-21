@@ -13,5 +13,5 @@
 
     - name: Restart knot
       ansible.builtin.command:
-        cmd: docker compose up -d
+        cmd: docker compose restart
         chdir: /home/wilnil/knot-app
