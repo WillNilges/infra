@@ -27,9 +27,9 @@
         chdir: /home/wilnil/acme-sh-app
 
     # XXX: Yes, I could use the docker plugin for this, but I am scared of it.
-    #- name: Restart acme-sh
-    #  ansible.builtin.command:
-    #    cmd: docker compose up -d
-    #    chdir: /home/wilnil/acme-sh-app
+    - name: Restart acme-sh
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/acme-sh-app
 
 # TODO: Figure out where to keep .env file safely

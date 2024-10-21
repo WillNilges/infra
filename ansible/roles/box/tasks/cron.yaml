@@ -1,0 +1,10 @@
+- name: Setup cronjobs
+  hosts: box
+  tasks:
+    - name: Copy certs to home.willard.gay
+      ansible.builtin.cron:
+        name: "copy certs to home.willard.gay"
+        minute: "0"
+        hour: "0"
+        user: "root"
+        job: "scp /home/wilnil/certs/acme-sh/willard.gay_ecc/willard.gay.cer root@home.willard.gay:/root/ssl && scp /home/wilnil/certs/acme-sh/willard.gay_ecc/willard.gay.key root@home.willard.gay:/root/ssl"
