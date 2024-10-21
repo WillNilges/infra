@@ -7,4 +7,4 @@ services:
     env_file: .env
     volumes:
       - /home/wilnil/certs/acme-sh/:/root/.acme.sh/
-    entrypoint: bash /root/issue-cert.sh
+    entrypoint: bash -c "/root/issue-cert.sh; cron -f"
