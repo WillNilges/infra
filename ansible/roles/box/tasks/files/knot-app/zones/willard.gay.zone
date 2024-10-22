@@ -13,4 +13,4 @@ cimmaron A 100.78.148.89
 *.cimmaron CNAME cimmaron
 
 world A 192.168.1.1
-home A 192.168.1.249
+home  A 192.168.3.114
