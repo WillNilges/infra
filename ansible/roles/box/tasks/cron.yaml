@@ -1,10 +1,15 @@
 - name: Setup cronjobs
   hosts: box
   tasks:
+    #    - name: Check for new certs daily
+    #      ansible.builtin.cron:
+    #        name: "check for new certs daily"
+    #        minute: "0"
+    #        hour: "0"
+    #        job: "cd /home/wilnil/acme-sh-app && docker compose up"
     - name: Copy certs to home.willard.gay
       ansible.builtin.cron:
-        name: "copy certs to home.willard.gay"
+        name: "copy certs to home.willard.gay daily"
         minute: "0"
         hour: "0"
-        user: "root"
-        job: "scp /home/wilnil/certs/acme-sh/willard.gay_ecc/willard.gay.cer root@home.willard.gay:/root/ssl && scp /home/wilnil/certs/acme-sh/willard.gay_ecc/willard.gay.key root@home.willard.gay:/root/ssl"
+        job: "sudo cp -r /home/wilnil/certs/acme-sh/willard.gay_ecc/ /tmp && sudo chown -R wilnil:wilnil /tmp/willard.gay_ecc/ && scp /tmp/willard.gay_ecc/willard.gay.cer root@home.willard.gay:/root/ssl && scp /tmp/willard.gay_ecc/willard.gay.key root@home.willard.gay:/root/ssl && rm -r /tmp/willard.gay_ecc"
