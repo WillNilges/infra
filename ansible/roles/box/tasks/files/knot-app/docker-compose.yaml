@@ -4,6 +4,7 @@ services:
     container_name: knot
     ports:
       - 53:53/udp
+    restart: always
     image: cznic/knot:latest
     command: knotd
     volumes:

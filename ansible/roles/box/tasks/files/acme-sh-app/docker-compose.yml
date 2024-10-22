@@ -4,6 +4,7 @@ services:
     container_name: acme-sh
     build:
       dockerfile: ./Dockerfile
+    restart: always
     env_file: .env
     volumes:
       - /home/wilnil/certs/acme-sh/:/root/.acme.sh/
