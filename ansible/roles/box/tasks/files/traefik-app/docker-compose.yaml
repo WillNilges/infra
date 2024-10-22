@@ -4,26 +4,26 @@ services:
     image: "traefik:v2.10"
     container_name: "traefik"
     command:
-      #- "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
-      - --providers.file.directory=/configuration/
-      - --providers.file.watch=true
 
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-      # - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
-      # - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
-      # - "--entrypoints.web.http.redirections.entrypoint.permanent=false"
       - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.willardresolver.acme.dnschallenge=true"
+      - "--certificatesresolvers.willardresolver.acme.dnschallenge.provider=hurricane"
+      - "--log.level=DEBUG"
+      - "--certificatesresolvers.willardresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.willardresolver.acme.email=wilnil@csh.rit.edu"
+      - "--certificatesresolvers.willardresolver.acme.storage=/letsencrypt/acme.json"
+    env_file: .env
     ports:
       - "80:80"
       - "443:443"
       - "8080:8080"
     volumes:
-      - "/home/wilnil/certs/acme-sh/willard.gay_ecc:/certs"
+      - "./letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      - "./configuration:/configuration"
     networks:
       - traefik
 
