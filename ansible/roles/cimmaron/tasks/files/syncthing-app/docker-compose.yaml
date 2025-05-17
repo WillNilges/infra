@@ -12,7 +12,10 @@ services:
     volumes:
       - ~/syncthing:/var/syncthing
       - type: bind
-        source: ~/syncthing/immich-app/
+        source: ~/syncthing/immich-app/library
         target: /var/immich-app/library
+      - type: bind
+        source: ~/syncthing/immich-app/postgres
+        target: /var/immich-app/postgres
     network_mode: host
     restart: unless-stopped

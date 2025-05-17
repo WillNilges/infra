@@ -14,5 +14,8 @@ services:
       - type: bind
         source: ~/immich-app/library
         target: /var/immich-app/library
+      - type: bind
+        source: ~/immich-app/postgres
+        target: /var/immich-app/postgres
     network_mode: host
     restart: unless-stopped

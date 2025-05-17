@@ -3,8 +3,12 @@
   tasks:
     - name: Make directory
       ansible.builtin.file:
-        path: /home/wilnil/nextcloud-app
+        path: "{{ item }}"
         state: directory
+      loop:
+        - /home/wilnil/nextcloud-app
+        - /home/wilnil/nextcloud-app/db
+        - /home/wilnil/nextcloud-app/nextcloud
 
     - name: Sync docker-compose.yml
       ansible.builtin.copy:
