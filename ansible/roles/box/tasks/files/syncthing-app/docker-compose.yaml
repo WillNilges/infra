@@ -17,5 +17,11 @@ services:
       - type: bind
         source: ~/immich-app/postgres
         target: /var/immich-app/postgres
+      - type: bind
+        source: ~/nextcloud-app/nextcloud
+        target: /var/nextcloud-app/nextcloud
+      - type: bind
+        source: ~/nextcloud-app/db
+        target: /var/nextcloud-app/db
     network_mode: host
     restart: unless-stopped

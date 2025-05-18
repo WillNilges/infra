@@ -1,0 +1,21 @@
+- name: Configure navidrome Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /home/wilnil/navidrome-app
+        - /home/wilnil/navidrome-app/data
+        #- /home/wilnil/navidrome-app/music # We're using Nextcloud's Music folder hehe
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: navidrome-app/
+        dest: /home/wilnil/navidrome-app
+
+    - name: Restart navidrome
+      ansible.builtin.command:
+        cmd: docker compose up -d --force-recreate
+        chdir: /home/wilnil/navidrome-app

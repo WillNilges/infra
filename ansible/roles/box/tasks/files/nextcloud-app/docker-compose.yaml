@@ -19,6 +19,7 @@ services:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
+    user: "1000"
 
   nextcloud:
     container_name: nextcloud
@@ -38,6 +39,9 @@ services:
       - MYSQL_DATABASE=nextcloud
       - MYSQL_USER=nextcloud
       - MYSQL_HOST=db
+      - PUID=1000
+      - PGID=1000
+    user: "1000"
     labels:
       - "traefik.enable=true"
       - "traefik.port=80"
