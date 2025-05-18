@@ -3,8 +3,14 @@
   tasks:
     - name: Make directory
       ansible.builtin.file:
-        path: /home/wilnil/syncthing-app
+        path: "{{ item }}"
         state: directory
+      loop:
+        - /home/wilnil/syncthing-app
+        - /home/wilnil/syncthing/immich-app/library
+        - /home/wilnil/syncthing/immich-app/postgres
+        - /home/wilnil/syncthing/nextcloud-app/nextcloud
+        - /home/wilnil/syncthing/nextcloud-app/db
 
     - name: Sync docker-compose.yml
       ansible.builtin.copy:
@@ -13,7 +19,7 @@
 
     - name: Restart Syncthing
       ansible.builtin.command:
-        cmd: docker compose up -d
+        cmd: docker compose up -d --force-recreate
         chdir: /home/wilnil/syncthing-app
 
 
