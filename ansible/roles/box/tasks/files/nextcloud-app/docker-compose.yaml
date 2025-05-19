@@ -64,13 +64,37 @@ services:
   #  environment:
   #    - password=${COLLABORA_PASSWORD}
   #    - username=${COLLABORA_USERNAME}
-  #    - aliasgroup1=https://cloud.box.willard
-  #    - server_name=collabora.box.willard
-  #    #- extra_params=--o:ssl.enable=true
+  #    - aliasgroup1=https://cloud.willard.gay
+  #    - server_name=collabora
+  #    - extra_params=--o:ssl.enable=false
   #  networks:
+  #    - traefik
   #    - nextcloud
   #  expose:
   #    - 9980
+  #  labels:
+  #    - "traefik.enable=true"
+  #    - "traefik.port=9980"
+  #      # with HTTPS
+  #    - "traefik.http.routers.collabora.rule=Host(`office.willard.gay`)"
+  #    - "traefik.http.routers.collabora.entrypoints=websecure"
+  #    - "traefik.http.routers.collabora.tls=true"
+  #    #- "traefik.http.routers.collabora.tls.certresolver=acmewillardresolver"
+  #      # Redirect insecure traffic
+  #    - "traefik.http.routers.collabora-insecure.rule=Host(`office.willard.gay`)"
+  #    - "traefik.http.routers.collabora-insecure.entrypoints=web"
+  #    - "traefik.http.middlewares.collabora-https.redirectscheme.scheme=https"
+  #    - "traefik.http.routers.collabora-insecure.middlewares=collabora-https@docker"
+  #    - "traefik.docker.network=traefik-net"
+
+#  httpd:
+#    image: httpd@sha256:c11efd67f6308f2c25965e4e9d13ded15e7c45c0367b95f619a16e03c6c1e2b1
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./path/to/your/httpd.conf:/usr/local/apache2/conf/httpd.conf
+#    restart: always
+
 
 networks:
   traefik:
