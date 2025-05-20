@@ -17,5 +17,5 @@
 
     - name: Restart open-webui
       ansible.builtin.command:
-        cmd: podman compose up -d --force-recreate
+        cmd: docker compose up -d --force-recreate
         chdir: /home/wilnil/open-webui-app

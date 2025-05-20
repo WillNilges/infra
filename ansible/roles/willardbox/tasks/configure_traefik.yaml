@@ -1,0 +1,17 @@
+- name: Configure Traefik Container
+  hosts: willardbox
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: /home/wilnil/traefik-app
+        state: directory
+
+    - name: Sync directory
+      ansible.builtin.copy:
+        src: traefik-app/
+        dest: /home/wilnil/traefik-app/
+
+    - name: Restart traefik
+      ansible.builtin.command:
+        cmd: docker compose up -d
+        chdir: /home/wilnil/traefik-app

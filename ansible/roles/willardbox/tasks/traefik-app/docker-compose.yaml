@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  traefik:
+    container_name: "traefik"
+    image: "traefik:v2.10"
+    restart: always
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - --providers.file.directory=/configuration/
+      - --providers.file.watch=true
+
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      # - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      # - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # - "--entrypoints.web.http.redirections.entrypoint.permanent=false"
+      - "--entrypoints.websecure.address=:443"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/home/wilnil/certs/acme-sh/willard.gay_ecc:/certs"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./configuration:/configuration"
+    networks:
+      - traefik
+
+networks:
+  traefik:
+    name: traefik-net

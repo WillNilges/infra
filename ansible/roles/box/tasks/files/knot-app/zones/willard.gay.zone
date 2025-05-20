@@ -18,3 +18,4 @@ world A 192.168.1.1
 home  A 192.168.1.114
 
 willardbox A 192.168.1.211
+ai CNAME willardbox
