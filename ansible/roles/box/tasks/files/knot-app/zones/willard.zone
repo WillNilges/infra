@@ -10,6 +10,10 @@ box A 100.115.232.75
 photos CNAME box
 cloud CNAME box
 music CNAME box
+office CNAME box
+
+willardbox A 192.168.1.211
+ai CNAME willardbox
 
 cimmaron A 100.78.148.89
 *.cimmaron CNAME cimmaron

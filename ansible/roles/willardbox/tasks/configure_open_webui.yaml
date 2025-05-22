@@ -1,0 +1,21 @@
+- name: Configure open-webui Container
+  hosts: willardbox
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /home/wilnil/open-webui-app
+        - /home/wilnil/open-webui-app/ollama
+        - /home/wilnil/open-webui-app/open-webui
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: open-webui-app/
+        dest: /home/wilnil/open-webui-app
+
+    - name: Restart open-webui
+      ansible.builtin.command:
+        cmd: docker compose up -d --force-recreate
+        chdir: /home/wilnil/open-webui-app
