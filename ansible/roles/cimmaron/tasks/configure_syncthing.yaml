@@ -11,6 +11,7 @@
         - /home/wilnil/syncthing/immich-app/postgres
         - /home/wilnil/syncthing/nextcloud-app/nextcloud
         - /home/wilnil/syncthing/nextcloud-app/db
+        - /home/wilnil/syncthing/trilium-app/trilium-data
 
     - name: Sync docker-compose.yml
       ansible.builtin.copy:

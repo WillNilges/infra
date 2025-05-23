@@ -1,5 +1,4 @@
 ---
-version: "3"
 services:
   syncthing:
     image: syncthing/syncthing
@@ -23,5 +22,8 @@ services:
       - type: bind
         source: ~/syncthing/nextcloud-app/db
         target: /var/nextcloud-app/db
+      - type: bind
+        source: ~/syncthing/trilium-app/trilium-data
+        target: /var/trilium-app/trilium-data
     network_mode: host
     restart: unless-stopped

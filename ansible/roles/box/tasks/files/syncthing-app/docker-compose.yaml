@@ -23,5 +23,8 @@ services:
       - type: bind
         source: ~/nextcloud-app/db
         target: /var/nextcloud-app/db
+      - type: bind
+        source: ~/trilium-app/trilium-data
+        target: /var/trilium-app/trilium-data
     network_mode: host
     restart: unless-stopped

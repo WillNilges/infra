@@ -1,0 +1,38 @@
+# Running `docker-compose up` will create/use the "trilium-data" directory in the user home
+# Run `TRILIUM_DATA_DIR=/path/of/your/choice docker-compose up` to set a different directory
+# To run in the background, use `docker-compose up -d`
+services:
+  trilium:
+    # Optionally, replace `latest` with a version tag like `v0.90.3`
+    # Using `latest` may cause unintended updates to the container
+    image: triliumnext/notes@sha256:846671ab2f0025b66d7bc9563e22b983f04b85c047aac6cdeb2d4e52c245c516 # v0.93.0
+    # Restart the container unless it was stopped by the user
+    restart: unless-stopped
+    environment:
+      - TRILIUM_DATA_DIR=/home/node/trilium-data
+    expose:
+      - 8080
+    volumes:
+      - /home/wilnil/trilium-app/trilium-data:/home/node/trilium-data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=8080"
+        # with HTTPS
+      - "traefik.http.routers.trilium.rule=Host(`notes.willard.gay`)"
+      - "traefik.http.routers.trilium.entrypoints=websecure"
+      - "traefik.http.routers.trilium.tls=true"
+        # Redirect insecure traffic
+      - "traefik.http.routers.trilium-insecure.rule=Host(`notes.willard.gay`)"
+      - "traefik.http.routers.trilium-insecure.entrypoints=web"
+      - "traefik.http.middlewares.trilium-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.trilium-insecure.middlewares=trilium-https@docker"
+      - "traefik.docker.network=traefik-net"
+
+networks:
+  traefik:
+    external: true
+    name: traefik-net

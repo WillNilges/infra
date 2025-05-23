@@ -1,0 +1,20 @@
+- name: Configure Trilium Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /home/wilnil/trilium-app
+        - /home/wilnil/trilium-app/trilium-data
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: trilium-app/
+        dest: /home/wilnil/trilium-app
+
+    - name: Restart trilium
+      ansible.builtin.command:
+        cmd: docker compose up -d --force-recreate
+        chdir: /home/wilnil/trilium-app

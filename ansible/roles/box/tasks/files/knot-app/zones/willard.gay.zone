@@ -10,6 +10,7 @@ photos CNAME box
 cloud CNAME box
 music CNAME box
 office CNAME box
+notes CNAME box
 
 cimmaron A 100.78.148.89
 *.cimmaron CNAME cimmaron
