@@ -33,7 +33,7 @@ services:
     links:
       - db
     volumes:
-      - /home/wilnil/nextcloud-app/nextcloud:/var/www/html
+      - /home/wilnil/nextcloud-app/nextcloud/nextcloud:/var/www/html
     environment:
       - MYSQL_PASSWORD=${DB_PASSWORD}
       - MYSQL_DATABASE=nextcloud

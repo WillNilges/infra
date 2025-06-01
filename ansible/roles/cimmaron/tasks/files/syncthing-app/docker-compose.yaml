@@ -17,8 +17,8 @@ services:
         source: ~/syncthing/immich-app/postgres
         target: /var/immich-app/postgres
       - type: bind
-        source: ~/syncthing/nextcloud-app/nextcloud
-        target: /var/nextcloud-app/nextcloud
+        source: ~/syncthing/nextcloud-app/nextcloud-02
+        target: /var/nextcloud-app/nextcloud-02
       - type: bind
         source: ~/syncthing/nextcloud-app/db
         target: /var/nextcloud-app/db
