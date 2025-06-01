@@ -1,0 +1,20 @@
+- name: Configure vaultwarden Container
+  hosts: box
+  tasks:
+    - name: Make directory
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - /home/wilnil/vaultwarden-app
+        - /home/wilnil/vaultwarden-app/vw-data
+
+    - name: Sync docker-compose.yml
+      ansible.builtin.copy:
+        src: vaultwarden-app/
+        dest: /home/wilnil/vaultwarden-app
+
+    - name: Restart vaultwarden
+      ansible.builtin.command:
+        cmd: docker compose up -d --force-recreate
+        chdir: /home/wilnil/vaultwarden-app

@@ -25,5 +25,8 @@ services:
       - type: bind
         source: ~/syncthing/trilium-app/trilium-data
         target: /var/trilium-app/trilium-data
+      - type: bind
+        source: ~/vaultwarden-app/vw-data
+        target: /var/vaultwarden-app/vw-data
     network_mode: host
     restart: unless-stopped

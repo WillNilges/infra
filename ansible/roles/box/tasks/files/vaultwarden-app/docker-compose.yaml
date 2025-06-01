@@ -1,0 +1,31 @@
+services:
+  vaultwarden:
+    image: quay.io/vaultwarden/server@sha256:87edb99945da91bd7504ac1435495595af2e89ad2c7adc151ae5bf091ec8baf2
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: "https://vault.willard.gay"
+    volumes:
+      - /home/wilnil/vaultwarden-app/vw-data/:/data/
+    expose:
+      - 80
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=80"
+        # with HTTPS
+      - "traefik.http.routers.vaultwarden.rule=Host(`vault.willard.gay`)"
+      - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+      - "traefik.http.routers.vaultwarden.tls=true"
+        # Redirect insecure traffic
+      - "traefik.http.routers.vaultwarden-insecure.rule=Host(`vault.willard.gay`)"
+      - "traefik.http.routers.vaultwarden-insecure.entrypoints=web"
+      - "traefik.http.middlewares.vaultwarden-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.vaultwarden-insecure.middlewares=vaultwarden-https@docker"
+      - "traefik.docker.network=traefik-net"
+
+networks:
+  traefik:
+    external: true
+    name: traefik-net
